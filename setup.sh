@@ -39,9 +39,7 @@ bash $DOWNLOADS_DIR/Anaconda3-4.4.0-Linux-x86_64.sh -b -p $PYTHON_INSTALL_DIR
 export PATH=PYTHON_INSTALL_DIR/bin:$PATH
 
 # PIP install dependencies
-pip install django
-pip install mod_wsgi-httpd
-pip install mod_wsgi
+# pip install -r requirements.txt
 exit
 
 # Confirm Django installation
