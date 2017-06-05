@@ -11,15 +11,21 @@
 # Fail on first error
 set -e
 
-# Extract arguments
-HOST_IP=$1
-HOST_PORT=$2
-
 # Fail if arguments not passed
 if [[ $# -ne 2 ]] ; then
     echo 'Must pass two arguments:  HOST_IP and HOST_PORT'
     exit 0
 fi
+
+# Fail if running as a superuser (root)
+if [[ $EUID -eq 0 ]]; then
+   echo "This script must NOT be run as root" 
+   exit 1
+fi
+
+# Extract arguments
+HOST_IP=$1
+HOST_PORT=$2
 
 # Base locations
 DOWNLOADS_DIR=./downloads
