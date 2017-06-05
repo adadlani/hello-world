@@ -27,9 +27,10 @@ fi
 HOST_IP=$1
 HOST_PORT=$2
 
-# Base locations
+# Base locations and other constants
 DOWNLOADS_DIR=./downloads
 PYTHON_INSTALL_DIR=$HOME/anaconda3
+DJANGO_PROJECT_NAME=mysite
 
 function cleanup {
   echo cleanup...
@@ -62,7 +63,7 @@ exit
 python -m django --version
  
 # Create sample Django project and perform initial setup
-django-admin startproject mysite
+django-admin startproject $DJANGO_PROJECT_NAME
 cd mysite
 python manage.py migrate
 
@@ -70,7 +71,7 @@ python manage.py migrate
 # python manage.py runserver $HOST_IP:$HOST_PORT
 
 # Run Django using Apache webserver (production)
-PYTHON_WSGI_MODULE=mysite.wsgi
+PYTHON_WSGI_MODULE=$DJANGO_PROJECT_NAME.wsgi
 mod_wsgi-express start-server --application-type module $PYTHON_WSGI_MODULE --host $HOST_IP --port $HOST_PORT
 
 # Monitor logs
