@@ -12,6 +12,8 @@ fi
 # Fail on first error
 set -e
 
+# Start timer
+
 # Extract arguments
 HOST_IP=$1
 HOST_PORT=$2
@@ -48,3 +50,5 @@ mod_wsgi-express start-server --application-type module $PYTHON_WSGI_MODULE --ho
 
 # Monitor logs
 tail -f /tmp/mod_wsgi-$HOST_IP\:$HOST_PORT\:500/error_log 
+
+# Stop timer
