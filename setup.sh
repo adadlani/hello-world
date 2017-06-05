@@ -1,5 +1,5 @@
 #!/bin/bash
-# Sample script to build a Django development box
+# Sample script to build a Django development box (run as non-superuser)
 # Base OS configurations:
 # => CentOS 6.x
 # => yum update
