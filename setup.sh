@@ -73,8 +73,5 @@ python manage.py migrate
 PYTHON_WSGI_MODULE=mysite.wsgi
 mod_wsgi-express start-server --application-type module $PYTHON_WSGI_MODULE --host $HOST_IP --port $HOST_PORT
 
-
 # Monitor logs
 tail -f /tmp/mod_wsgi-$HOST_IP\:$HOST_PORT\:500/error_log 
-
-# Stop timer
