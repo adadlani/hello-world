@@ -14,7 +14,7 @@ set -e
 # Fail if arguments not passed
 if [[ $# -ne 2 ]] ; then
     echo 'Must pass two arguments:  HOST_IP and HOST_PORT'
-    exit 0
+    exit 1
 fi
 
 # Fail if running as a superuser (root)
@@ -30,6 +30,7 @@ HOST_PORT=$2
 # Base locations and other constants
 DOWNLOADS_DIR=./downloads
 PYTHON_INSTALL_DIR=$HOME/anaconda3
+PIP_REQUIREMENTS=./requirements.txt
 DJANGO_PROJECT_NAME=mysite
 
 function cleanup {
@@ -56,8 +57,7 @@ bash $DOWNLOADS_DIR/Anaconda3-4.4.0-Linux-x86_64.sh -b -p $PYTHON_INSTALL_DIR
 export PATH=PYTHON_INSTALL_DIR/bin:$PATH
 
 # PIP install dependencies
-pip install -r requirements.txt
-exit
+pip install -r $PIP_REQUIREMENTS
 
 # Confirm Django installation
 python -m django --version
