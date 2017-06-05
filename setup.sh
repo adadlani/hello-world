@@ -17,8 +17,8 @@ HOST_IP=$1
 HOST_PORT=$2
 
 # Download & Install Anaconda Anaconda3-4.4.0-Linux-x86_64.sh
-wget https://repo.continuum.io/archive/Anaconda3-4.4.0-Linux-x86_64.sh
-bash Anaconda3-4.4.0-Linux-x86_64.sh -b -p $HOME/anaconda3
+wget https://repo.continuum.io/archive/Anaconda3-4.4.0-Linux-x86_64.sh -O ./downloads/Anaconda3-4.4.0-Linux-x86_64.sh
+bash ./downloads/Anaconda3-4.4.0-Linux-x86_64.sh -b -p $HOME/anaconda3
 
 # Setup environment to pick up latest Python/PIP
 export PATH=$HOME/anaconda3/bin:$PATH
@@ -27,6 +27,7 @@ export PATH=$HOME/anaconda3/bin:$PATH
 pip install django
 pip install mod_wsgi-httpd
 pip install mod_wsgi
+exit
 
 # Confirm Django installation
 python -m django --version
