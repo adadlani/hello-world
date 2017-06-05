@@ -1,0 +1,4 @@
+django
+mod_wsgi-httpd
+mod_wsgi
+psycopg2
