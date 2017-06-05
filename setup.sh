@@ -18,14 +18,22 @@ set -e
 HOST_IP=$1
 HOST_PORT=$2
 
-# Download & Install Anaconda Anaconda3-4.4.0-Linux-x86_64.sh
+# Base locations
+DOWNLOADS_DIR=./downloads
 PYTHON_INSTALL_DIR=$HOME/anaconda3
-mkdir ./downloads
-wget https://repo.continuum.io/archive/Anaconda3-4.4.0-Linux-x86_64.sh -O ./downloads/Anaconda3-4.4.0-Linux-x86_64.sh
+
+# Perform initial cleanup
 if [ -d "$PYTHON_INSTALL_DIR" ]; then
   rm -rf $PYTHON_INSTALL_DIR
 fi
-bash ./downloads/Anaconda3-4.4.0-Linux-x86_64.sh -b -p $PYTHON_INSTALL_DIR
+if [ -d "$DOWNLOADS_DIR" ]; then
+  rm -rf $DOWNLOADS_DIR
+fi
+
+# Download & Install Anaconda Anaconda3-4.4.0-Linux-x86_64.sh
+mkdir $DOWNLOADS_DIR
+wget https://repo.continuum.io/archive/Anaconda3-4.4.0-Linux-x86_64.sh -O ./downloads/Anaconda3-4.4.0-Linux-x86_64.sh
+bash $DOWNLOADS_DIR/Anaconda3-4.4.0-Linux-x86_64.sh -b -p $PYTHON_INSTALL_DIR
 
 # Setup environment to pick up latest Python/PIP
 export PATH=PYTHON_INSTALL_DIR/bin:$PATH
