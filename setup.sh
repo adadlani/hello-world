@@ -1,7 +1,19 @@
 #!/bin/bash
 # Sample script to build a Django development box
+# Base OS configurations:
+# => CentOS 6.x
+# => yum update
+# => yum install gcc
+# => Configure firewalls for port ???
 # Arguments: $1 => HOST_IP
 #            $2 => HOST_PORT
+
+# Fail on first error
+set -e
+
+# Extract arguments
+HOST_IP=$1
+HOST_PORT=$2
 
 # Fail if arguments not passed
 if [[ $# -ne 2 ]] ; then
@@ -9,26 +21,24 @@ if [[ $# -ne 2 ]] ; then
     exit 0
 fi
 
-# Fail on first error
-set -e
-
-# Start timer
-
-# Extract arguments
-HOST_IP=$1
-HOST_PORT=$2
-
 # Base locations
 DOWNLOADS_DIR=./downloads
 PYTHON_INSTALL_DIR=$HOME/anaconda3
 
+function cleanup {
+  echo cleanup...
+  if [ -d "$PYTHON_INSTALL_DIR" ]; then
+    rm -rf $PYTHON_INSTALL_DIR
+  fi
+  if [ -d "$DOWNLOADS_DIR" ]; then
+    rm -rf $DOWNLOADS_DIR
+  fi
+}
+
+# Main script
+
 # Perform initial cleanup
-if [ -d "$PYTHON_INSTALL_DIR" ]; then
-  rm -rf $PYTHON_INSTALL_DIR
-fi
-if [ -d "$DOWNLOADS_DIR" ]; then
-  rm -rf $DOWNLOADS_DIR
-fi
+cleanup
 
 # Download & Install Anaconda Anaconda3-4.4.0-Linux-x86_64.sh
 mkdir $DOWNLOADS_DIR
@@ -39,7 +49,7 @@ bash $DOWNLOADS_DIR/Anaconda3-4.4.0-Linux-x86_64.sh -b -p $PYTHON_INSTALL_DIR
 export PATH=PYTHON_INSTALL_DIR/bin:$PATH
 
 # PIP install dependencies
-# pip install -r requirements.txt
+pip install -r requirements.txt
 exit
 
 # Confirm Django installation
