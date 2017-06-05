@@ -3,6 +3,12 @@
 # Arguments: $1 => HOST_IP
 #            $2 => HOST_PORT
 
+# Fail if arguments not passed
+if [[ $# -ne 2 ]] ; then
+    echo 'Must pass two arguments:  HOST_IP and HOST_PORT'
+    exit 0
+fi
+
 # Fail on first error
 set -e
 
