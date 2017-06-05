@@ -3,6 +3,10 @@
 # Arguments: $1 => HOST_IP
 #            $2 => HOST_PORT
 
+# Fail on first error
+set -e
+
+# Extract arguments
 HOST_IP=$1
 HOST_PORT=$2
 
