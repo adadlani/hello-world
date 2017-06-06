@@ -1,10 +1,10 @@
 #!/bin/bash
 # Sample script to build a Django development box (run as non-superuser)
 # Base OS configurations:
-# => CentOS 6.x
+# => CentOS 6.x using bridged network
 # => yum update
 # => yum install git gcc wget httpd-devel [tree] (-devel also installs httpd, httpd-tools, etc)
-# => Configure firewalls for port ???
+# => Configured firewall to open port HOST_PORT
 # Arguments: $1 => HOST_PORT
 
 # Fail on first error
@@ -84,12 +84,11 @@ cd $DJANGO_PROJECT_NAME
 python manage.py migrate
 
 # Run Django using built-in webserver (non-production) blocking call
-echo $HOST_IP:$HOST_PORT
 python manage.py runserver $HOST_IP:$HOST_PORT
 
 # Run Django using Apache webserver (production) blocking call
 #PYTHON_WSGI_MODULE=$DJANGO_PROJECT_NAME.wsgi
-mod_wsgi-express start-server --application-type module $PYTHON_WSGI_MODULE --host $HOST_IP --port $HOST_PORT
+#mod_wsgi-express start-server --application-type module $PYTHON_WSGI_MODULE --host $HOST_IP --port $HOST_PORT
 
 # Monitor logs
 #tail -f /tmp/mod_wsgi-$HOST_IP\:$HOST_PORT\:500/error_log 
