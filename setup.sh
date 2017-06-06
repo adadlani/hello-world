@@ -61,10 +61,11 @@ function install_dep {
 #cleanup
 
 # Download & Install Anaconda Anaconda3-4.4.0-Linux-x86_64.sh
-#dwn_install_anaconda
+dwn_install_anaconda
 
 # Setup environment to pick up latest Python/PIP
 export PATH=$PYTHON_INSTALL_DIR/bin:$PATH
+exit
 
 # PIP install dependencies
 install_dep
