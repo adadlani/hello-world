@@ -78,6 +78,7 @@ DJANGO_VERSION=$(python -m django --version)
 echo Django version: $DJANGO_VERSION
  
 # Create sample Django project and perform initial setup
+rm -rf $DJANGO_PROJECT_NAME
 django-admin startproject $DJANGO_PROJECT_NAME
 cd $DJANGO_PROJECT_NAME
 python manage.py migrate
