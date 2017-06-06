@@ -78,12 +78,13 @@ DJANGO_VERSION=$(python -m django --version)
 echo Django version: $DJANGO_VERSION
  
 # Create sample Django project and perform initial setup
-rm -rf $DJANGO_PROJECT_NAME
-django-admin startproject $DJANGO_PROJECT_NAME
+#rm -rf $DJANGO_PROJECT_NAME
+#django-admin startproject $DJANGO_PROJECT_NAME
 cd $DJANGO_PROJECT_NAME
 python manage.py migrate
 
 # Run Django using built-in webserver (non-production) blocking call
+# You may need to add $HOST_IP to ALLOWED_HOSTS in project/project/settings.py
 python manage.py runserver $HOST_IP:$HOST_PORT
 
 # Run Django using Apache webserver (production) blocking call
