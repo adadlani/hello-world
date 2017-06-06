@@ -30,7 +30,7 @@ DOWNLOADS_DIR=./downloads
 PYTHON_INSTALL_DIR=$HOME/anaconda3
 PIP_REQUIREMENTS=./requirements.txt
 DJANGO_PROJECT_NAME=mysite
-HOST_IP=$(hostname -I)
+HOST_IP=$(hostname -I | xargs)
 
 # Helper functions
 function cleanup {
