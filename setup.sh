@@ -5,15 +5,14 @@
 # => yum update
 # => yum install git gcc wget [tree]
 # => Configure firewalls for port ???
-# Arguments: $1 => HOST_IP
-#            $2 => HOST_PORT
+# Arguments: $1 => HOST_PORT
 
 # Fail on first error
 set -e
 
 # Fail if arguments not passed
-if [[ $# -ne 2 ]] ; then
-    echo 'Must pass two arguments:  HOST_IP and HOST_PORT'
+if [[ $# -ne 1 ]] ; then
+    echo 'Must pass argument(s): HOST_PORT'
     exit 1
 fi
 
@@ -24,14 +23,14 @@ if [[ $EUID -eq 0 ]]; then
 fi
 
 # Extract arguments
-HOST_IP=$1
-HOST_PORT=$2
+HOST_PORT=$1
 
 # Base locations and other constants
 DOWNLOADS_DIR=./downloads
 PYTHON_INSTALL_DIR=$HOME/anaconda3
 PIP_REQUIREMENTS=./requirements.txt
 DJANGO_PROJECT_NAME=mysite
+HOST_IP=$(hostname -I)
 
 function cleanup {
   echo cleanup...
