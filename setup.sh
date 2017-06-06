@@ -89,7 +89,15 @@ python manage.py migrate
 
 # Run Django using Apache webserver (production) blocking call
 PYTHON_WSGI_MODULE=$DJANGO_PROJECT_NAME.wsgi
-mod_wsgi-express start-server --application-type module $PYTHON_WSGI_MODULE --host $HOST_IP --port $HOST_PORT
+
+# To serve up static content, modify project/project/settings.py:
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# Always run this command if any project/app static files are updated
+# Note: This will create a subfolder static under the project (current working directory)
+python manage.py collectstatic
+
+# Launch server (Apache)
+mod_wsgi-express start-server --application-type module $PYTHON_WSGI_MODULE --host $HOST_IP --port $HOST_PORT --url-alias /static static
 
 # Monitor logs
 #tail -f /tmp/mod_wsgi-$HOST_IP\:$HOST_PORT\:500/error_log 
