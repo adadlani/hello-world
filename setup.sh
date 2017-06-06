@@ -85,11 +85,11 @@ python manage.py migrate
 
 # Run Django using built-in webserver (non-production) blocking call
 # You may need to add $HOST_IP to ALLOWED_HOSTS in project/project/settings.py
-python manage.py runserver $HOST_IP:$HOST_PORT
+#python manage.py runserver $HOST_IP:$HOST_PORT
 
 # Run Django using Apache webserver (production) blocking call
-#PYTHON_WSGI_MODULE=$DJANGO_PROJECT_NAME.wsgi
-#mod_wsgi-express start-server --application-type module $PYTHON_WSGI_MODULE --host $HOST_IP --port $HOST_PORT
+PYTHON_WSGI_MODULE=$DJANGO_PROJECT_NAME.wsgi
+mod_wsgi-express start-server --application-type module $PYTHON_WSGI_MODULE --host $HOST_IP --port $HOST_PORT
 
 # Monitor logs
 #tail -f /tmp/mod_wsgi-$HOST_IP\:$HOST_PORT\:500/error_log 
