@@ -97,7 +97,7 @@ PYTHON_WSGI_MODULE=$DJANGO_PROJECT_NAME.wsgi
 python manage.py collectstatic
 
 # Launch server (Apache)
-mod_wsgi-express start-server --application-type module $PYTHON_WSGI_MODULE --host $HOST_IP --port $HOST_PORT --url-alias /static static
+mod_wsgi-express start-server --application-type module $PYTHON_WSGI_MODULE --host $HOST_IP --port $HOST_PORT --url-alias /static static &
 
 # Monitor logs
 #tail -f /tmp/mod_wsgi-$HOST_IP\:$HOST_PORT\:500/error_log 
