@@ -52,7 +52,10 @@ function dwn_install_anaconda {
 function install_dep {
   pip install -r $PIP_REQUIREMENTS
 }
-# Main script
+
+###################
+Main script
+###################
 
 # Perform initial cleanup
 cleanup
