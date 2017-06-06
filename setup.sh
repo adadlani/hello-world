@@ -71,10 +71,10 @@ function install_dep {
 # Require reboot for mod_wsgi-httpd to install ???
 
 # PIP install dependencies
-install_dep
+#install_dep
 
 # Confirm Django installation
-$DJANGO_VERSION=$(python -m django --version)
+DJANGO_VERSION=$(python -m django --version)
 echo Django version: $DJANGO_VERSION
  
 # Create sample Django project and perform initial setup
