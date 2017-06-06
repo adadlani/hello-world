@@ -32,6 +32,7 @@ PIP_REQUIREMENTS=./requirements.txt
 DJANGO_PROJECT_NAME=mysite
 HOST_IP=$(hostname -I)
 
+# Helper functions
 function cleanup {
   echo cleanup...
   if [ -d "$PYTHON_INSTALL_DIR" ]; then
@@ -42,21 +43,28 @@ function cleanup {
   fi
 }
 
+function dwn_install_anaconda {
+  mkdir $DOWNLOADS_DIR
+  wget https://repo.continuum.io/archive/Anaconda3-4.4.0-Linux-x86_64.sh -O ./downloads/Anaconda3-4.4.0-Linux-x86_64.sh
+  bash $DOWNLOADS_DIR/Anaconda3-4.4.0-Linux-x86_64.sh -b -p $PYTHON_INSTALL_DIR
+}
+
+function install_dep {
+  pip install -r $PIP_REQUIREMENTS
+}
 # Main script
 
 # Perform initial cleanup
 cleanup
 
 # Download & Install Anaconda Anaconda3-4.4.0-Linux-x86_64.sh
-mkdir $DOWNLOADS_DIR
-wget https://repo.continuum.io/archive/Anaconda3-4.4.0-Linux-x86_64.sh -O ./downloads/Anaconda3-4.4.0-Linux-x86_64.sh
-bash $DOWNLOADS_DIR/Anaconda3-4.4.0-Linux-x86_64.sh -b -p $PYTHON_INSTALL_DIR
+dwn_install_anaconda
 
 # Setup environment to pick up latest Python/PIP
 export PATH=PYTHON_INSTALL_DIR/bin:$PATH
 
 # PIP install dependencies
-pip install -r $PIP_REQUIREMENTS
+install_dep
 
 # Confirm Django installation
 $DJANGO_VERSION=$(python -m django --version)
