@@ -84,6 +84,7 @@ cd $DJANGO_PROJECT_NAME
 python manage.py migrate
 
 # Run Django using built-in webserver (non-production) blocking call
+echo $HOST_IP:$HOST_PORT
 python manage.py runserver $HOST_IP:$HOST_PORT
 
 # Run Django using Apache webserver (production) blocking call
