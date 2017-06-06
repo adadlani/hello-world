@@ -59,11 +59,12 @@ export PATH=PYTHON_INSTALL_DIR/bin:$PATH
 pip install -r $PIP_REQUIREMENTS
 
 # Confirm Django installation
-python -m django --version
+$DJANGO_VERSION=$(python -m django --version)
+echo Django version: $DJANGO_VERSION
  
 # Create sample Django project and perform initial setup
 django-admin startproject $DJANGO_PROJECT_NAME
-cd mysite
+cd $DJANGO_PROJECT_NAME
 python manage.py migrate
 
 # Run Django using built-in webserver (non-production)
