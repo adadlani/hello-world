@@ -3,7 +3,7 @@
 # Base OS configurations:
 # => CentOS 6.x
 # => yum update
-# => yum install git gcc wget [tree]
+# => yum install git gcc wget httpd-devel [tree]
 # => Configure firewalls for port ???
 # Arguments: $1 => HOST_PORT
 
