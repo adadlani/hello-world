@@ -94,7 +94,8 @@ PYTHON_WSGI_MODULE=$DJANGO_PROJECT_NAME.wsgi
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # Always run this command if any project/app static files are updated
 # Note: This will create a subfolder static under the project (current working directory)
-python manage.py collectstatic
+# Option -c clears the current static folder
+python manage.py collectstatic -c
 
 # Launch server (Apache)
 mod_wsgi-express start-server --application-type module $PYTHON_WSGI_MODULE --host $HOST_IP --port $HOST_PORT --url-alias /static static &
