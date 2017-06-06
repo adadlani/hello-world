@@ -54,7 +54,7 @@ function install_dep {
 }
 
 ###################
-Main script
+# Main script entry
 ###################
 
 # Perform initial cleanup
