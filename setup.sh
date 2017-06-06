@@ -65,7 +65,7 @@ dwn_install_anaconda
 
 # Setup environment to pick up latest Python/PIP
 export PATH=$PYTHON_INSTALL_DIR/bin:$PATH
-echo "PATH=$PYTHON_INSTALL_DIR/bin:$PATH" >> $HOME/.bashrc
+echo "export PATH=$HOME/anaconda3/bin:$PATH" >> $HOME/.bashrc
 exit
 
 # Require reboot for mod_wsgi-httpd to install ???
