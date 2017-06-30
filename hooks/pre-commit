@@ -1,0 +1,10 @@
+#!/bin/env python
+import sys
+
+print("pre-commit hook called", sys.argv)
+
+# Test our condition
+# If OK return 0
+# Else return 1
+
+exit (0)
