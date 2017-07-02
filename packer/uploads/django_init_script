@@ -1,0 +1,30 @@
+### BEGIN INIT INFO
+# Provides:        django
+# Required-Start:  $all
+# Required-Stop:
+# Default-Start:   3
+# Short-Description:  Start Django Web Application Framework
+# Description:        This script starts Django Web Application Framework using mod_wsgi
+### END INIT INFO
+
+PATH=/home/ec2-user/anaconda3/bin:$PATH
+DJANGO_PROJECT_NAME=mysite
+PYTHON_WSGI_MODULE=$DJANGO_PROJECT_NAME.wsgi
+HOST_IP=$(hostname -I | xargs)
+DJANGO_PROJECT_HOST_PORT=8080
+
+function do_start {
+  echo "Starting mod-wsgi..."
+  logger "Starting mod-wsgi...$HOST_IP:DJANGO_PROJECT_HOST_PORT"
+  cd /home/ec2-user/$DJANGO_PROJECT_NAME
+  su ec2-user -c 'mod_wsgi-express start-server --application-type module '"$PYTHON_WSGI_MODULE"' --host '"$HOST_IP"' --port '"$DJANGO_PROJECT_HOST_PORT"' --url-alias /static static &'
+}
+
+case "$1" in
+  start)
+    do_start
+    ;;
+  stop)
+    # No-op
+    ;;
+esac

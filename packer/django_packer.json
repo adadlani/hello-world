@@ -1,0 +1,53 @@
+{
+    "_opt1_comment": "Ubuntu Server 16.04 LTS (HVM), SSD Volume Type",
+    "_opt1_source_ami": "ami-80861296",
+
+    "_opt2_comment": "Amazon Linux AMI 2017.03.0 (HVM), SSD Volume Type",
+    "_opt2_source_ami": "ami-c58c1dd3",
+
+    "_opt3_comment": "SUSE Linux Enterprise Server 12 SP2 (HVM), SSD Volume Type",
+    "_opt3_source_ami": "ami-fde4ebea",
+
+    "_comment": "Files are uploaded with ec2-user owner/group with rw",
+
+    "variables": {
+        "aws_region": "{{env `AWS_REGION`}}",
+        "aws_access_key": "{{env `AWS_ACCESS_KEY`}}",
+        "aws_secret_key": "{{env `AWS_SECRET_KEY`}}",
+        "ami_id": "ami-c58c1dd3"
+    },
+
+    "builders" : [
+        {
+            "type": "amazon-ebs",
+            "region": "{{user `aws_region`}}",
+            "access_key": "{{user `aws_access_key`}}",
+            "secret_key": "{{user `aws_secret_key`}}",
+            "source_ami": "{{user `ami_id`}}",
+            "instance_type": "t2.micro",
+            "ssh_username": "ec2-user",
+            "ssh_port": 22,
+            "ssh_timeout": "10000s",
+            "ami_name": "MiddleTier-{{isotime | clean_ami_name}}",
+            "ami_description": "Awesome Django AMI Designed by Security Architect",
+            "tags": {
+                "role": "DjangoBox"
+            },
+            "run_tags": {
+                "role": "buildSystem"
+            }
+        }
+    ],
+
+    "provisioners": [
+        {
+            "type": "file",
+            "source": "uploads/",
+            "destination": "/home/ec2-user"
+        },
+        {
+            "type": "shell",
+            "script": "django_setup.sh"
+        }
+    ]
+}
