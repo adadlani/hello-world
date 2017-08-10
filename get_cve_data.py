@@ -1,7 +1,6 @@
 # Script to import CVE data from NIST https://nvd.nist.gov/vuln/data-feeds#JSON_FEED
 # https://static.nvd.nist.gov/feeds/json/cve/1.0/nvdcve-1.0-modified.json.gz
 
-
 import gzip
 import json
 import pycurl
