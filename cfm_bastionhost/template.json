@@ -1,0 +1,9 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "SSH Bastion Host",
+    "Resources": {
+        "EC2Instance": {},
+        "ElasticIp": {},
+        "SecurityGroup": {}
+    }
+}
