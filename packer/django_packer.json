@@ -35,7 +35,9 @@
             },
             "run_tags": {
                 "role": "buildSystem"
-            }
+            },
+            "launch_block_device_mappings": [
+            ]
         }
     ],
 
@@ -46,8 +48,8 @@
             "destination": "/home/ec2-user"
         },
         {
-            "type": "shell",
-            "script": "django_setup.sh"
+             "type": "shell",
+             "script": "django_setup.sh"
         }
     ]
 }
