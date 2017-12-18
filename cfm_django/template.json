@@ -1,0 +1,85 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "Django Application",
+    "Parameters": {
+        "VPC": {
+            "Description": "The default VPC",
+            "Type": "AWS::EC2::VPC::Id"
+        },
+        "KeyPair": {
+            "Description": "A SSH key pair",
+            "Type": "AWS::EC2::KeyPair::KeyName"
+        },
+        "Subnet": {
+            "Description": "Subnet to deploy EC2 instance",
+            "Type": "AWS::EC2::Subnet::Id"
+        },
+        "AMI": {
+            "Description": "The AMI to use",
+            "Type": "String"
+        },
+        "UserData": {
+            "Description": "User data bootstrap code",
+            "Type": "String"
+        }
+    },
+    "Resources": {
+        "EC2Instance": {
+            "Type": "AWS::EC2::Instance",
+            "Properties": {
+                "ImageId": {"Ref": "AMI"},
+                "InstanceType": "t2.micro",
+                "NetworkInterfaces": [
+                    {
+                        "AssociatePublicIpAddress": "true",
+                        "DeviceIndex": "0",
+                        "GroupSet": [{"Ref": "SecurityGroup"}],
+                        "SubnetId": {"Ref": "Subnet"}
+                    }
+                ],
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "Webserver"
+                    }
+                ],
+                "KeyName": {"Ref": "KeyPair"},
+                "UserData": {"Ref": "UserData"}
+            }
+        },
+        "ElasticIp": {
+            "Type": "AWS::EC2::EIP",
+            "Properties": {
+                "InstanceId": {"Ref": "EC2Instance"},
+                "Domain": "vpc"
+            }
+        },
+        "SecurityGroup": {
+            "Type": "AWS::EC2::SecurityGroup",
+            "Properties": {
+                "GroupDescription": "Webserver SecurityGroup",
+                "VpcId": {"Ref": "VPC"},
+                "SecurityGroupIngress": [
+                    {
+                        "CidrIp": "0.0.0.0/0",
+                        "FromPort": 22,
+                        "IpProtocol": "tcp",
+                        "ToPort": 22
+                    },
+                    {
+                        "CidrIp": "0.0.0.0/0",
+                        "FromPort": 80,
+                        "IpProtocol": "tcp",
+                        "ToPort": 80
+                    }
+                ]
+            }
+        }
+    },
+    "Outputs": {
+        "WebserverPublicIp": {
+            "Description": "Public IP address ...",
+            "Value": {"Fn::GetAtt": ["EC2Instance", "PublicIp"]}
+        }
+    }
+}
