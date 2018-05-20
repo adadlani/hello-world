@@ -4,7 +4,6 @@
 import gzip
 import json
 import pycurl
-from io import BytesIO
 
 NVD_CVE_ENDPOINT = 'https://static.nvd.nist.gov/feeds/json/cve/1.0/nvdcve-1.0-modified.json.gz'
 DATA_FILE = './data.json.gz'
