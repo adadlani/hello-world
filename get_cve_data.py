@@ -13,6 +13,7 @@ with open(DATA_FILE, 'wb') as fd:
     c = pycurl.Curl()
     c.setopt(c.URL, NVD_CVE_ENDPOINT)
     c.setopt(c.WRITEDATA, fd)
+    c.setopt(c.FOLLOWLOCATION, 1)
     c.perform()
 
 if c.getinfo(c.RESPONSE_CODE) != 200:
