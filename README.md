@@ -16,3 +16,6 @@ mod-wsgi-httpd (2.4.23.2)
 Other possible tools:
 - Foreman (system admin tool)
 - Consul
+
+New feature (1):
+- A really cool feature to be added in branch name feature-1
